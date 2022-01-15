@@ -1,19 +1,22 @@
 class Solution {
 public:
+    int arr[2501];
+    
     int lengthOfLIS(vector<int>& nums) {
         
-        int len = nums.size(), answer = 1;
-        vector<int> dp(len, 1);
+        if (nums.size() == 1) return 1;
+        int idx = 0;
+        arr[idx] = nums[0];
         
-        for (int i = 1; i < len; i++) {
-            for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {
-                    dp[i] = (dp[i] > dp[j] + 1) ? dp[i] : dp[j] + 1;
-                }
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] > arr[idx]) 
+                arr[++idx] = nums[i];
+            else {
+                int pos = lower_bound(arr, arr + idx, nums[i]) -arr;
+                arr[pos] = nums[i];
             }
-            answer = (dp[i] > answer) ? dp[i] : answer;
         }
         
-        return answer;
+        return idx + 1;
     }
 };
