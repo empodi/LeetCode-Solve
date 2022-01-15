@@ -2,8 +2,7 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         
-        int len = nums.size();
-        int answer = 1, localMax = 1;
+        int len = nums.size(), answer = 1;
         vector<int> dp(len, 1);
         
         for (int i = 1; i < len; i++) {
