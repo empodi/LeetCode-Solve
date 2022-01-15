@@ -16,7 +16,8 @@ public:
             if (dp[i] >= len - 1) return true;
         }
         
-        return true;
+        if (dp[len - 1] >= len - 1) return true;
+        else return false;
     }
 };
 
