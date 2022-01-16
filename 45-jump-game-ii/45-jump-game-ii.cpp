@@ -3,20 +3,17 @@ public:
     int jump(vector<int>& nums) {
         
         int len = nums.size();
-        vector<int> dp(len, 0); 
-        // store the number of minimum jumps to reach ith index
+        int cnt = 0, localMax = 0, globalMax = 0;
         
-        for (int i = 0; i < len; i++) {
-            int curMax = min(len - 1, i + nums[i]);
-            int jump = dp[i] + 1;
+        for (int i = 0; i < len - 1; i++) {
+            globalMax = max(globalMax, i + nums[i]);
             
-            for (int j = i + 1; j <= curMax; j++) {
-                if (dp[j]) continue;
-                dp[j] = jump;
-                if(j == len - 1) break;
+            if (i == localMax) {
+                cnt++;
+                localMax = globalMax;
             }
         }
         
-        return dp[len - 1];
+        return cnt;
     }
 };
