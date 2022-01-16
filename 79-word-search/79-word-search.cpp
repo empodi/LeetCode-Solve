@@ -2,26 +2,28 @@ class Solution {
 public:
     int width;
     int height;
-    bool flag = false;
     
-    void helper(vector<vector<char>>& board, string& word, int i, int j, int idx) {
+    bool helper(vector<vector<char>>& board, string& word, int i, int j, int idx) {
         
         if (idx + 1 == word.length() && board[i][j] == word[idx]) {
-            flag = true;
-            return;
-        }
+            return true;
+        } 
         
-        if (board[i][j] != word[idx]) return;
+        if (board[i][j] != word[idx]) return false;
         
-        char c = board[i][j];
+        char ch = board[i][j];
         board[i][j] = '*';
         
-        if (i > 0) helper(board, word, i - 1, j, idx + 1);
-        if (j > 0) helper(board, word, i, j - 1, idx + 1);
-        if (i + 1 < height) helper(board, word, i + 1, j, idx + 1);
-        if (j + 1 < width) helper(board, word, i, j + 1, idx + 1);
+        bool a = false, b = false, c = false, d = false;
         
-        board[i][j] = c;
+        if (i > 0) a = helper(board, word, i - 1, j, idx + 1);
+        if (j > 0) b = helper(board, word, i, j - 1, idx + 1);
+        if (i + 1 < height) c = helper(board, word, i + 1, j, idx + 1);
+        if (j + 1 < width) d = helper(board, word, i, j + 1, idx + 1);
+        
+        board[i][j] = ch;
+        
+        return a || b || c || d;
     }
     
     bool exist(vector<vector<char>>& board, string word) {
@@ -36,12 +38,12 @@ public:
                     if (word.length() == 1)
                         return true;
 
-                    helper(board, word, i, j, 0);
-                    if (flag) return flag;
+                    if (helper(board, word, i, j, 0))
+                        return true;
                 }
             }
         }
         
-        return flag;
+        return false;
     }
 };
