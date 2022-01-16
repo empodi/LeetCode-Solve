@@ -2,29 +2,23 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         
-        int max = 0, i = 1, len = prices.size();
-        int curMin, curMax;
+        if (prices.size() <= 1) return 0;
         
-        while (i < len && prices[i - 1] >= prices[i]) i++;
+        int max = 0, ans = 0, min = prices[0];
         
-        if (i == len) return max;
-        
-        curMin = prices[i - 1]; curMax = prices[i];
-        max = curMax - curMin;
-        
-        for (; i < len; i++) {
+        for (int i = 1; i < prices.size(); i++) {
             
-            if (prices[i] < curMin) {
-                curMin = prices[i];
-                curMax = curMin;
+            if (prices[i] < min) {
+                min = prices[i];
+                max = min;
                 continue;
             }
-            if (prices[i] > curMax) {
-                curMax = prices[i];
-                if (curMax - curMin > max) max = curMax - curMin;
+            if (prices[i] > max) {
+                max = prices[i];
+                if (max - min > ans) ans = max - min;
             }
         }
     
-        return max;
+        return ans;
     }
 };
