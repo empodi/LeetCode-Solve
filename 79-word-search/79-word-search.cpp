@@ -3,6 +3,7 @@ public:
     int width;
     int height;
     int moving[4][2] ={{0,1},{0,-1},{1,0},{-1,0}};
+    bool visited[6][6];
     
     bool helper(vector<vector<char>>& board, string& word, int i, int j, int idx) {
         
@@ -11,8 +12,7 @@ public:
         
         if (board[i][j] != word[idx]) return false;
         
-        char tmp = board[i][j];
-        board[i][j] = '*';
+        visited[i][j] = true;
         
         bool ret = false;
         
@@ -20,11 +20,11 @@ public:
             int x = i + moving[k][0];
             int y = j + moving[k][1];
             
-            if (x >= 0 && y >= 0 && x < height && y < width)
+            if (x >= 0 && y >= 0 && x < height && y < width && !visited[x][y])
                 ret = ret || helper(board, word, x, y, idx + 1);
         }
         
-        board[i][j] = tmp;
+        visited[i][j] = false;
         
         return ret;
     }
@@ -40,7 +40,8 @@ public:
                     
                     if (word.length() == 1)
                         return true;
-
+                    
+                    memset(visited, false, sizeof(visited));
                     if (helper(board, word, i, j, 0))
                         return true;
                 }
