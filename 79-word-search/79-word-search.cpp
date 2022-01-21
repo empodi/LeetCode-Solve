@@ -2,28 +2,31 @@ class Solution {
 public:
     int width;
     int height;
+    int moving[4][2] ={{0,1},{0,-1},{1,0},{-1,0}};
     
     bool helper(vector<vector<char>>& board, string& word, int i, int j, int idx) {
         
-        if (idx + 1 == word.length() && board[i][j] == word[idx]) {
+        if (idx + 1 == word.length() && board[i][j] == word[idx]) 
             return true;
-        } 
         
         if (board[i][j] != word[idx]) return false;
         
-        char ch = board[i][j];
+        char tmp = board[i][j];
         board[i][j] = '*';
         
-        bool a = false, b = false, c = false, d = false;
+        bool ret = false;
         
-        if (i > 0) a = helper(board, word, i - 1, j, idx + 1);
-        if (j > 0) b = helper(board, word, i, j - 1, idx + 1);
-        if (i + 1 < height) c = helper(board, word, i + 1, j, idx + 1);
-        if (j + 1 < width) d = helper(board, word, i, j + 1, idx + 1);
+        for (int k = 0; k < 4; k++) {
+            int x = i + moving[k][0];
+            int y = j + moving[k][1];
+            
+            if (x >= 0 && y >= 0 && x < height && y < width)
+                ret = ret || helper(board, word, x, y, idx + 1);
+        }
         
-        board[i][j] = ch;
+        board[i][j] = tmp;
         
-        return a || b || c || d;
+        return ret;
     }
     
     bool exist(vector<vector<char>>& board, string word) {
