@@ -7,10 +7,8 @@ public:
     
     bool helper(vector<vector<char>>& board, string& word, int i, int j, int idx) {
         
-        if (idx + 1 == word.length() && board[i][j] == word[idx]) 
-            return true;
-        
         if (board[i][j] != word[idx]) return false; 
+        if (idx + 1 == word.length()) return true;
         
         visited[i][j] = true;
         
