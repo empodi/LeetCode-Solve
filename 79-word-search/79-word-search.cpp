@@ -10,7 +10,8 @@ public:
         if (board[i][j] != word[idx]) return false; 
         if (idx + 1 == word.length()) return true;
         
-        visited[i][j] = true;
+        char tmp = board[i][j];
+        board[i][j] = '*';
         
         bool ret = false;
         
@@ -22,7 +23,7 @@ public:
                 ret = ret || helper(board, word, x, y, idx + 1);
         } 
                 
-        visited[i][j] = false; 
+        board[i][j] = tmp;
         
         return ret;
     }
