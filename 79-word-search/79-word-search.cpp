@@ -10,7 +10,7 @@ public:
         if (idx + 1 == word.length() && board[i][j] == word[idx]) 
             return true;
         
-        if (board[i][j] != word[idx]) return false;
+        if (board[i][j] != word[idx]) return false; 
         
         visited[i][j] = true;
         
@@ -22,9 +22,9 @@ public:
             
             if (x >= 0 && y >= 0 && x < height && y < width && !visited[x][y])
                 ret = ret || helper(board, word, x, y, idx + 1);
-        }
-        
-        visited[i][j] = false;
+        } 
+                
+        visited[i][j] = false; 
         
         return ret;
     }
@@ -41,9 +41,10 @@ public:
                     if (word.length() == 1)
                         return true;
                     
-                    memset(visited, false, sizeof(visited));
-                    if (helper(board, word, i, j, 0))
+                    //memset(visited, false, sizeof(visited));
+                    if (helper(board, word, i, j, 0)) {
                         return true;
+                    }
                 }
             }
         }
