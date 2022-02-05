@@ -4,7 +4,7 @@ public:
         
         int len = s.length();
         string ret;
-        int maxLen = 0, start = 0, end = 0;
+        int maxLen = 1, start = 0, end = 0;
         
         vector<vector<bool>> dp(len, vector<bool>(len, false));
         
@@ -29,10 +29,7 @@ public:
                 }
             }
         }
-
-        for (int i = start; i <= end ; i++)
-            ret.push_back(s[i]);
         
-        return ret;
+        return s.substr(start, maxLen);
     }
 };
