@@ -4,7 +4,7 @@ public:
         
         int len = s.length();
         string ret;
-        int maxLen = 1, start = 0, end = 0;
+        int maxLen = 1, start = 0;
         
         vector<vector<bool>> dp(len, vector<bool>(len, false));
         
@@ -23,7 +23,6 @@ public:
                         if (d + 1 > maxLen) {
                             maxLen = d + 1;
                             start = j;
-                            end = j + d;
                         } 
                     }   
                 }
