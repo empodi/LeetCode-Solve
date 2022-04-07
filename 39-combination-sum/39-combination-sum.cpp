@@ -4,7 +4,7 @@ private:
     int tg;
     int len;
     
-    void solve(vector<int>& candidates, vector<int>& v, int sum, int idx) {
+    void dfs(vector<int>& candidates, vector<int>& v, int sum, int idx) {
         
         if (sum > tg) return;
         
@@ -14,7 +14,7 @@ private:
         
         for (int i = idx; i < len; i++) {
             v.push_back(candidates[i]);
-            solve(candidates, v, sum + candidates[i], i);
+            dfs(candidates, v, sum + candidates[i], i);
             v.pop_back();
         }
     }
@@ -27,7 +27,7 @@ public:
         
         vector<int> v;
         
-        solve(candidates, v, 0, 0);
+        dfs(candidates, v, 0, 0);
         
         return ret;
     }
