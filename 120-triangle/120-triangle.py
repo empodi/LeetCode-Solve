@@ -14,7 +14,7 @@ class Solution:
                 if j == 0: row[j] += triangle[i - 1][j]
                 elif i == j: row[j] += triangle[i - 1][j - 1]
                 else: 
-                    row[j] += min(triangle[i - 1][j - 1:j + 1])
+                    row[j] += min(triangle[i - 1][j - 1], triangle[i - 1][j])
                     
         return min(triangle[tLen - 1])
             
