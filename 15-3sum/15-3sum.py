@@ -24,10 +24,8 @@ class Solution:
                     while j < numLen and nums[j] == nums[j - 1]: j += 1
                 elif s > 0:
                     k -= 1
-                    while k > 0 and nums[k] == nums[k + 1]: k -= 1
                 else:
                     j += 1
-                    while j < numLen and nums[j] == nums[j - 1]: j += 1
 
             i += 1
             while i < numLen and nums[i] == nums[i - 1]: i += 1
