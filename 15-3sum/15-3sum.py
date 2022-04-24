@@ -28,9 +28,7 @@ class Solution:
                 else:
                     j += 1
                     while j < numLen and nums[j] == nums[j - 1]: j += 1
-                    
-                
-            
+
             i += 1
             while i < numLen and nums[i] == nums[i - 1]: i += 1
                     
