@@ -1,10 +1,6 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         
-        strLen = len(strs)
-        
-        if strLen == 1: return [strs]
-        
         myHash = dict()
         retArray = []
         
