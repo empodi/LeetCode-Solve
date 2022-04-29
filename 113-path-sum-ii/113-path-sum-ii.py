@@ -1,41 +1,30 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    vector<vector<int>> ans;
-    
-    void DFS(TreeNode* node, vector<int>& v, int curSum, int& targetSum) {
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         
-        if (!node) return;
+        answer = []
         
-        curSum += node->val;
-        v.push_back(node->val);
+        def DFS(node, currentSum, curArray):
             
-        if (!node->left && !node->right) {
-            if (curSum == targetSum) {
-                ans.push_back(v);
-            }
-        }
+            if node is None: return
+            
+            curArray.append(node.val)
+            currentSum += node.val
+            
+            if node.left is None and node.right is None: # leaf node
+                if currentSum == targetSum:
+                    answer.append(curArray.copy())
+            
+            DFS(node.left, currentSum, curArray)
+            DFS(node.right, currentSum, curArray)
+            
+            curArray.pop()
+            
+        DFS(root, 0, [])
         
-        DFS(node->left, v, curSum, targetSum);
-        DFS(node->right, v, curSum, targetSum);
-        v.pop_back();
-    }
-    
-    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
-        
-        vector<int> v;
-        DFS(root, v, 0, targetSum);
-        
-        return ans;
-    }
-};
+        return answer
