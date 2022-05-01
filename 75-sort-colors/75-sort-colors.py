@@ -8,7 +8,7 @@ class Solution:
         for num in nums:
             colors[num] += 1
             
-        print(colors)
+        #print(colors)
         idx = 0
         rwb = 0
         
