@@ -17,12 +17,11 @@ class Solution:
                 answer += 1
                 
                 queue = [[i, j]]
+                grid[i][j] = "0"
                 
                 while queue:
                     x, y = (queue[0][0], queue[0][1])
                     queue.pop(0)
-                    
-                    grid[x][y] = "0"
                     
                     for mov in moving:
                         nx, ny = (x + mov[0], y + mov[1])
