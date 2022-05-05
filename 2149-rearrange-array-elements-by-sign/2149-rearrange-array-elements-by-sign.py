@@ -3,24 +3,21 @@ class Solution:
         
         numsLen = len(nums)
         
-        pos = []
-        neg = []
-        answer = [0 for i in range(numsLen)]
+        posIdx, negIdx = 0, 1
         
-        for num in nums:
+        answer = [0 for x in range(numsLen)]
+        
+        for i, num in enumerate(nums):
             
             if num > 0:
-                pos.append(num)
+                answer[posIdx] = num
+                posIdx += 2
             else:
-                neg.append(num)
+                answer[negIdx] = num
+                negIdx += 2
                 
-        
-        for i in range(int(numsLen / 2)):
-            
-            answer[i * 2] = pos[i]
-            answer[i * 2 + 1] = neg[i]
-        
         return answer
+        
         
         
         
