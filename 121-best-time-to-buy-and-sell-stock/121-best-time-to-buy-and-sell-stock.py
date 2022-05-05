@@ -4,14 +4,13 @@ class Solution:
         minBuy = 987654321
         maxProfit = 0
         
-        for i, price in enumerate(prices):
+        for price in prices:
             
             if price < minBuy:
                 minBuy = price
                 continue
             
-            if price - minBuy > maxProfit:
-                maxProfit = price - minBuy
+            maxProfit = maxProfit if price - minBuy < maxProfit else price - minBuy
                 
         return maxProfit
             
