@@ -5,7 +5,7 @@ class Solution:
         
         pos = []
         neg = []
-        answer = []
+        answer = [0 for i in range(numsLen)]
         
         for num in nums:
             
@@ -17,8 +17,8 @@ class Solution:
         
         for i in range(int(numsLen / 2)):
             
-            answer.append(pos[i])
-            answer.append(neg[i])
+            answer[i * 2] = pos[i]
+            answer[i * 2 + 1] = neg[i]
         
         return answer
         
