@@ -8,8 +8,9 @@ class Solution:
             
             if price < minBuy:
                 minBuy = price
-            else:            
-                maxProfit = maxProfit if price - minBuy < maxProfit else price - minBuy
+            else:        
+                diff = price - minBuy
+                maxProfit = maxProfit if diff < maxProfit else diff
                 
         return maxProfit
             
