@@ -1,30 +1,28 @@
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
         
-        vIdx = 0
-        swpIdx = 0
-        numsLen = len(nums)
+        if not nums: 
+            return 0
         
-        while vIdx < numsLen and nums[vIdx] != val:
-            vIdx += 1
-            
-        swpIdx = vIdx + 1
+        def mySort(a, b):
+            if a == val:
+                return 1
+            if b == val:
+                return -1
+            return 0
         
-        while swpIdx < numsLen and nums[swpIdx] == val:
-            swpIdx += 1
+        nums.sort(key=cmp_to_key(mySort))
+        
+        idx = 0
+        
+        while idx < len(nums) and nums[idx] != val:
+            idx += 1
             
-        while swpIdx < numsLen:
-            
-            nums[vIdx], nums[swpIdx] = nums[swpIdx], nums[vIdx]
-            
-            while vIdx < numsLen and nums[vIdx] != val:
-                vIdx += 1
+        return idx
+        
+        
+        
+        
                 
-            swpIdx = vIdx + 1
-        
-            while swpIdx < numsLen and nums[swpIdx] == val:
-                swpIdx += 1
-                
-        return vIdx
 
         
