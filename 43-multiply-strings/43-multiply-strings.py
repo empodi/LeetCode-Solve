@@ -20,11 +20,11 @@ class Solution:
             while mIdx >= 0 or carry:
                 if mIdx >= 0:
                     carry = carry + int(multiplicand[mIdx]) * int(digit)
-                result += str(carry % 10)
+                result = str(carry % 10) + result
                 carry //= 10
                 mIdx -= 1
             
-            return result[::-1]
+            return result
         
         def strSum(a: str, b: str) -> str:
             aIdx, bIdx = len(a) - 1, len(b) - 1
@@ -37,12 +37,12 @@ class Solution:
                 if bIdx >= 0:
                     carry += int(b[bIdx])
                     
-                result += str(carry % 10)
+                result = str(carry % 10) + result
                 carry //= 10
                 aIdx -= 1
                 bIdx -= 1
             
-            return result[::-1]
+            return result
         
         for i in range(num2Len - 1, -1, -1):
             
