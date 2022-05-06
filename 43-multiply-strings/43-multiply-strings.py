@@ -3,6 +3,9 @@ class Solution:
         
         if num1 == "0" or num2 == "0":
             return "0"
+        
+        if len(num1) < len(num2):
+            num1, num2 = num2, num1
             
         num1Len, num2Len = len(num1), len(num2)
         answer = None
