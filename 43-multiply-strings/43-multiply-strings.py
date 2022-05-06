@@ -45,7 +45,6 @@ class Solution:
                 continue
             
             mul = digitMultiply(num1, num2[i]) + "0" * (num2Len - i - 1)
-            print(mul)
             
             if not answer:
                 answer = mul
