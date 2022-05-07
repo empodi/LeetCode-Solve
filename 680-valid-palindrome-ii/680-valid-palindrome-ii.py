@@ -10,17 +10,14 @@ class Solution:
         
             return True
         
-        
-        flag = False
+
         left, right = 0, len(s) - 1
         
         while left < right:
             
             if s[left] == s[right]:
                 left, right = left + 1, right - 1
-                continue
-            
-            if s[left] != s[right]:
+            else:
                 if check(left + 1, right) or check(left, right - 1):
                     return True
                 else:
