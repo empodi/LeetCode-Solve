@@ -7,9 +7,7 @@ class Solution:
         def build_stack(string, stack):
             for s in string:
                 if s == "#":
-                    if not stack:
-                        continue
-                    else:
+                    if stack:
                         stack.pop()
                 else:
                     stack.append(s)
