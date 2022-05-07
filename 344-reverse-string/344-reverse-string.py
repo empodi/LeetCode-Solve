@@ -4,9 +4,7 @@ class Solution:
         Do not return anything, modify s in-place instead.
         """
         
-        sLen = len(s)
-        
-        for i in range(sLen // 2):
-            s[i], s[sLen - 1 - i] = s[sLen - 1 - i], s[i]
+        for i in range(len(s) // 2):
+            s[i], s[~i] = s[~i], s[i]
             
         
