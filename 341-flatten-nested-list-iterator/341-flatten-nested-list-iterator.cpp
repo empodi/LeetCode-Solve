@@ -45,17 +45,12 @@ public:
     
     int next() {
         
-        if (hasNext()) {
-            return flattened[curIdx++];
-        }
-        return INT_MIN;
+        return flattened[curIdx++];
     }
     
     bool hasNext() {
         
-        if (curIdx < flattenedSize) 
-            return true;
-        return false;
+        return curIdx < flattenedSize;
     }
 };
 
