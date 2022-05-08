@@ -4,21 +4,16 @@ class Solution:
         if len(s) != len(t):
             return False
         
-        sArray = [0] * 26;
-        tArray = [0] * 26;
+        alphabet = [0] * 26;
         
         for c in s:
-            sArray[ord(c) - 97] += 1
-            
+            alphabet[ord(c) - 97] += 1
+        
         for c in t:
-            tArray[ord(c) - 97] += 1
+            alphabet[ord(c) - 97] -= 1
             
-        ret = True
+            if alphabet[ord(c) - 97] < 0:
+                return False
             
-        for i in range(26):
-            if sArray[i] != tArray[i]:
-                ret = False
-                break
-            
-        return ret
+        return True
         
