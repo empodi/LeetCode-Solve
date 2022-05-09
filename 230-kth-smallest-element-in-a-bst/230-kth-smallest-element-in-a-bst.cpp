@@ -12,7 +12,6 @@
 class Solution {
 public:
     priority_queue<int> pq;
-    int val = 0;
     
     int kthSmallest(TreeNode* root, int k) {
         
@@ -29,6 +28,8 @@ public:
         
         if (pq.size() < k)
             pq.push(root->val);
+        else
+            return;
         
         inorder(root->right, k);
     }
