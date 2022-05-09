@@ -8,18 +8,14 @@ public:
     }
     
     void add(int key) {
-        
         array[key] = true;
     }
     
     void remove(int key) {
-        
-        if (array[key])
-            array[key] = false;
+        array[key] = false;
     }
     
     bool contains(int key) {
-        
         return array[key];
     }
 };
