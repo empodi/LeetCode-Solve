@@ -1,6 +1,5 @@
 class Solution {
 public:
-    char words[1001][1001];
     
     string convert(string s, int numRows) {
         
@@ -8,43 +7,36 @@ public:
             return s;
         }
         
-        memset(words, '#', sizeof(words));
+        vector<vector<char>> v(numRows, vector<char>{});
         
-        int col = 0;
+        int idx = 0;
         int sLen = s.length();
-        int curRow = 0;
+        bool flag = true;
         string answer = "";
         
-        int i = 0;
-        while (i < sLen) {
+        for (int i = 0; i < sLen; i++) {
             
-            words[curRow][col] = s[i];
-            i++;
-            curRow++;
+            v[idx].push_back(s[i]);
             
-            if (curRow == numRows) {
-                curRow = numRows - 1;
-                
-                while (i < sLen) {
-                    curRow--;
-                    col++;
-                    words[curRow][col] = s[i];
-                    if (curRow == 0) break;
-                    i++;
-                }
+            if (flag) idx++;
+            else idx--;
+            
+            if (idx == numRows) {
+                idx = numRows - 2;
+                flag = false;
+            }
+            else if (idx == -1) {
+                idx = 1;
+                flag = true;
+            }
+        }    
+        
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < v[i].size(); j++) {
+                answer += v[i][j];
             }
         }
         
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < 1001; j++) {
-                if (words[i][j] != '#') {
-                    answer += words[i][j];
-                    //cout << words[i][j] << " ";
-                    if (answer.length() == sLen) 
-                        break;
-                }
-            }
-        }
         return answer;
     }
 };
