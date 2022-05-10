@@ -10,41 +10,42 @@
  */
 class Solution {
 public:
-    int listLen = 0;
-    vector<vector<ListNode*>> v{20002};
+    struct cmp {
+      bool operator() (ListNode* a, ListNode* b) {
+          return a->val > b->val;
+      }  
+    };
     
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         
-        listLen = lists.size();
-        ListNode* head = nullptr, *prev;
+        if (lists.empty()) return nullptr;
+        if (lists.size() == 1 && !lists[0]) return nullptr;
         
-        if (!listLen) return nullptr;
+        priority_queue<ListNode*, vector<ListNode*>, cmp> pq; 
+        ListNode* head = nullptr, *trail;
         
-        for (int i = 0; i < listLen; i++) {
-        
-            ListNode* node = lists[i];
+        for (ListNode* node : lists) {
             
-            while(node) {
-                v[node->val + 10000].push_back(node);
+            while (node) {
+                pq.push(node);
                 node = node->next;
             }
         }
         
-        for (int i = 0; i < 20002; i++) {
+        if (pq.empty()) return nullptr;
+        
+        head = pq.top();
+        head->next = nullptr;
+        trail = head;
+        pq.pop();
+        
+        while (!pq.empty()) {
             
-            for (int j = 0; j < v[i].size(); j++) {
-                
-                if (!head) {
-                    head = v[i][j];
-                    head->next = nullptr;
-                    prev = head;
-            
-                }
-                else {
-                    prev->next = v[i][j];
-                    prev = v[i][j];
-                }
-            }
+            ListNode* tmp = pq.top();
+            pq.pop();
+            tmp->next = nullptr;
+            trail->next = tmp;
+            trail = trail->next;
         }
         
         return head;
