@@ -7,24 +7,23 @@
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         
-        answer = []
-        
-        def DFS(node, currentSum, curArray):
+        def DFS(node, cur_array, remainingSum):
             
             if node is None: return
             
-            curArray.append(node.val)
-            currentSum += node.val
+            remainingSum -= node.val
             
-            if node.left is None and node.right is None: # leaf node
-                if currentSum == targetSum:
-                    answer.append(curArray.copy())
+            if remainingSum == 0 and not (node.left or node.right):
+                cur_array += [node.val]
+                answer.append(cur_array)
+                return
             
-            DFS(node.left, currentSum, curArray)
-            DFS(node.right, currentSum, curArray)
+            DFS(node.left, cur_array + [node.val], remainingSum)
+            DFS(node.right, cur_array + [node.val], remainingSum)
             
-            curArray.pop()
+            #curArray.pop()
             
-        DFS(root, 0, [])
+        answer = []
+        DFS(root, cur_array = [], remainingSum = targetSum)
         
         return answer
