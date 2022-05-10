@@ -19,7 +19,6 @@ public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         
         if (lists.empty()) return nullptr;
-        if (lists.size() == 1 && !lists[0]) return nullptr;
         
         priority_queue<ListNode*, vector<ListNode*>, cmp> pq; 
         ListNode* head = nullptr, *trail;
