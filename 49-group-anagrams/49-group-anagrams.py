@@ -5,8 +5,22 @@ class Solution:
         answer = []
         rIdx = 0
         
+        def countingSortString(word: str) -> str:
+            
+            counter = [0] * 26
+            ret = ""
+            
+            for alphabet in word:
+                counter[ord(alphabet) - 97] += 1
+                
+            for i in range(26):
+                ret += chr(i + 97) * counter[i]
+            
+            return ret
+            
+        
         for word in strs:
-            tmp = "".join(sorted(word))
+            tmp = countingSortString(word)
 
             if tmp not in myHash:
                 myHash[tmp] = rIdx
