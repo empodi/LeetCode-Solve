@@ -1,9 +1,6 @@
 class Solution:
     def capitalizeTitle(self, title: str) -> str:
         
-        lower = "abcdefghijklmnopqrstuvwxyz"
-        upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        
         wordList = title.split()
         answer = []
         
