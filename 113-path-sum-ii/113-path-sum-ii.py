@@ -21,8 +21,6 @@ class Solution:
             DFS(node.left, cur_array + [node.val], remainingSum)
             DFS(node.right, cur_array + [node.val], remainingSum)
             
-            #curArray.pop()
-            
         answer = []
         DFS(root, cur_array = [], remainingSum = targetSum)
         
