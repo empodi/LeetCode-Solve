@@ -29,7 +29,3 @@ class Solution:
         solve([])
         
         return answer
-            
-            
-            
-            
