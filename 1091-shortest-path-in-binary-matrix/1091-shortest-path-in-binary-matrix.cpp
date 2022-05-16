@@ -31,8 +31,6 @@ public:
                 continue;
             }
             
-            visited[x][y] = true;
-            
             for (int k = 0; k < 8; k++) {
                 int nx = x + moving[k][0];
                 int ny = y + moving[k][1];
