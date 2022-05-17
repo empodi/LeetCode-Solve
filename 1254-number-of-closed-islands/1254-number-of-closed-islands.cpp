@@ -4,40 +4,16 @@ private:
     int width;
     int moving[4][2] = { {1,0},{-1,0},{0,1},{0,-1} };
 public:
-    bool solve(vector<vector<int>>& grid ,int i, int j) {
+    void floodFill(vector<vector<int>>& grid, int x, int y) {
         
-        if (i == 0 || j == 0 || i == height - 1 || j == width - 1)
-            return false;
+        if (x < 0 || y < 0 || x >= height || y >= width || grid[x][y])
+            return;
         
-        bool flag = true;
+        grid[x][y] = 1;
         
-        queue<pair<int,int>> q;
-        q.push({i, j});
-        grid[i][j] = 1;
-        
-        while (!q.empty()) {
-            int x = q.front().first;
-            int y = q.front().second;
-            q.pop();
-            
-            for (int k = 0; k < 4; k++) {
-                int nx = x + moving[k][0];
-                int ny = y + moving[k][1];
-                
-                if (nx < 0 || ny < 0 || nx >= height || ny >= width) 
-                    continue;
-                if (grid[nx][ny] == 1)
-                    continue;
-                
-                if (nx == 0 || ny == 0 || nx == height - 1 || ny == width - 1)
-                    flag = false;
-                
-                grid[nx][ny] = 1;
-                q.push({nx, ny});
-            }
+        for (int i = 0; i < 4; i++) {
+            floodFill(grid, x + moving[i][0], y + moving[i][1]);
         }
-        
-        return flag;
     }
     
     int closedIsland(vector<vector<int>>& grid) {
@@ -48,10 +24,27 @@ public:
         int answer = 0;
         
         for (int i = 0; i < height; i++) {
+            if (!grid[i][0]) 
+                floodFill(grid, i, 0);
+            if (!grid[i][width - 1]) 
+                floodFill(grid, i, width - 1);
+        }
+        
+        for (int i = 0; i < width; i++) {
+            if (!grid[0][i]) 
+                floodFill(grid, 0, i);
+            if (!grid[height - 1][i]) 
+                floodFill(grid, height - 1, i);
+        }
+        
+        
+        for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 
-                if (grid[i][j] == 0 && solve(grid, i, j))
+                if (grid[i][j] == 0) {
                     answer++;
+                    floodFill(grid, i, j);
+                }
             }
         }
         
