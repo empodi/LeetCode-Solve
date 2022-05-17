@@ -11,31 +11,18 @@ class Solution {
 public:    
     int targetVal;
     
-    TreeNode* solve(TreeNode* node, TreeNode*& cloned, vector<bool> v) {
+    TreeNode* solve(TreeNode* original, TreeNode* cloned) {
         
-        if (!node) return nullptr;
+        if (!original) return nullptr;
         
-        if (targetVal == node->val) {
-            
-            for (bool flag: v) {
-                if (flag) cloned = cloned->right;
-                else cloned = cloned->left;
-            }
-            
+        if (original->val == targetVal) 
             return cloned;
-        }
         
-        TreeNode* tn;
-        
-        v.push_back(0);
-        tn = solve(node->left, cloned, v);
+        TreeNode* tn = solve(original->left, cloned->left);
         
         if (tn) return tn;
         
-        v.pop_back();
-        v.push_back(1);
-        
-        return solve(node->right, cloned, v);
+        return solve(original->right, cloned->right);
     }
     
     TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
@@ -44,8 +31,7 @@ public:
             return cloned;
         
         targetVal = target->val;
-        vector<bool> v;
         
-        return solve(original, cloned, v);
+        return solve(original, cloned);
     }
 };
