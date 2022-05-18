@@ -33,7 +33,6 @@ private:
                 q.push({{nx, ny}, dist + 1});
             }
         }
-        
     }
     
 public:
