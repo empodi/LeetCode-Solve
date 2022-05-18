@@ -2,7 +2,6 @@ class Solution {
 private:
     int height;
     int width;
-    bool visited[101][101];
     int moving[4][2] = { {1,0},{-1,0},{0,1},{0,-1} };
 public:
     int maxDistance(vector<vector<int>>& grid) {
