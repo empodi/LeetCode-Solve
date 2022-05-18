@@ -19,6 +19,8 @@ private:
             int dist = q.front().second;
             q.pop();
             
+            if (grid[x][y] > dist) continue;
+            
             for (int k = 0; k < 4; k++) {
                 int nx = x + moving[k][0];
                 int ny = y + moving[k][1];
