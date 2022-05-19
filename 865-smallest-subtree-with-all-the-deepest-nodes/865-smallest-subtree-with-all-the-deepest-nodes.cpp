@@ -20,20 +20,18 @@ public:
         return 1 + max(ld, rd);
     }
     
-    TreeNode* getSubtree(TreeNode* node, int curDepth, const int& targetDepth) {
+    TreeNode* subtreeWithAllDeepest(TreeNode* root, int curDepth = 0, int targetDepth = 0) {
         
-        if (curDepth == targetDepth || !node) return node;
+        if (!targetDepth) 
+            targetDepth = findDepth(root);
+        if (curDepth == targetDepth || !root) 
+            return root;
         
-        TreeNode* left = getSubtree(node->left, curDepth + 1, targetDepth);
-        TreeNode* right = getSubtree(node->right, curDepth + 1, targetDepth);
-        
-        if (left && right) return node;
+        TreeNode* left = subtreeWithAllDeepest(root->left, curDepth + 1, targetDepth);
+        TreeNode* right = subtreeWithAllDeepest(root->right, curDepth + 1, targetDepth);
+     
+        if (left && right) return root;
         if (left) return left;
         return right;
-    }
-    
-    TreeNode* subtreeWithAllDeepest(TreeNode* root) {
-     
-        return getSubtree(root, 0, findDepth(root));
     }
 };
