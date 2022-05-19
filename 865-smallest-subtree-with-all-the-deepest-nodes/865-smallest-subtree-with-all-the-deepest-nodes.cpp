@@ -34,7 +34,6 @@ public:
     
     TreeNode* subtreeWithAllDeepest(TreeNode* root) {
      
-        if (!root->left && !root->right) return root;
         return getSubtree(root, 0, findDepth(root));
     }
 };
