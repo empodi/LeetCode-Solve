@@ -15,23 +15,21 @@ public:
     
     TreeNode* subtreeWithAllDeepest(TreeNode* root, int curDepth = 0) {
         
+        if (!root) 
+            return nullptr;
+        
         depth[root->val] = curDepth;
         
-        TreeNode *left = nullptr, *right = nullptr;
-        int lv = 0, rv = 0;
+        if (!root->left && !root->right) 
+            return root;
         
-        if (root->left) {
-            left = subtreeWithAllDeepest(root->left, curDepth + 1);
-            lv = depth[root->left->val];
-        }
-        if (root->right) {
-            right = subtreeWithAllDeepest(root->right, curDepth + 1);
-            rv = depth[root->right->val];
-        }
+        TreeNode *left = subtreeWithAllDeepest(root->left, curDepth + 1);
+        TreeNode* right = subtreeWithAllDeepest(root->right, curDepth + 1);
         
-        if (!left && !right) return root;
-
-        depth[root->val] = max(lv, rv);
+        int lv = left ? depth[root->left->val] : 0;
+        int rv = right ? depth[root->right->val] : 0;
+        
+        depth[root->val] = lv > rv ? lv : rv;
         
         if (left && right){
             if (lv == rv) return root;
