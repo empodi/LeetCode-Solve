@@ -11,7 +11,7 @@ public:
         q.push({{entrance[0], entrance[1]}, 0});
         maze[entrance[0]][entrance[1]] = '+';
         
-        while(!q.empty()) {
+        while(!q.empty() && answer < 0) {
             int x = q.front().first.first;
             int y = q.front().first.second;
             int dist = q.front().second + 1;
@@ -23,12 +23,8 @@ public:
                 if (nx < 0 || ny < 0 || nx >= height || ny >= width || maze[nx][ny] == '+')
                     continue;
                 if (nx == 0 || ny == 0 || nx == height - 1 || ny == width - 1) {
-                    if (answer >= 0) {
-                        answer = min(answer, dist);
-                    }
-                    else {
-                        answer = dist;
-                    }
+                    answer = dist;
+                    break;
                 }
                 maze[nx][ny] = '+';
                 q.push({{nx, ny}, dist});
