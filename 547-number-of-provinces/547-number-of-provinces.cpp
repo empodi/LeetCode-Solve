@@ -22,13 +22,11 @@ public:
                 
                 int x = Find(i);
                 int y = Find(j);
-                isConnected[x][y] = isConnected[y][x] = 0;
-                
                 if (x != y) cnt++;
+                isConnected[x][y] = isConnected[y][x] = 0;
                 parent[x] = y;
             }
         }
-        
         return len - cnt;
     }
 };
