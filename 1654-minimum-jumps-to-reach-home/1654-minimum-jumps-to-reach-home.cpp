@@ -4,7 +4,7 @@ private:
     int a;
     int b;
     int x;
-    bool visited[2000000];
+    bool visited[20001];
     int solve() {
         
         queue<pair<int,int>> q;
