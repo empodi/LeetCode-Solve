@@ -39,9 +39,7 @@ public:
     vector<vector<string>> solveNQueens(int n) {
         
         vector<int> v(n + 1);
-        
         helper(v, 0, n);
-        
         return ret;
     }
 };
