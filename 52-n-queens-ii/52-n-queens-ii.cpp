@@ -1,7 +1,6 @@
 class Solution {
-public:
+private:
     int ret = 0;
-    
     bool promising (vector<int>& v, int idx) {
         
         for (int k = 1; k < idx; k++) {
@@ -24,13 +23,11 @@ public:
             }
         }
     }
-    
+public: 
     int totalNQueens(int n) {
         
         vector<int> v(n + 1);
-        
         helper(v, 0, n);
-        
         return ret;
     }
 };
