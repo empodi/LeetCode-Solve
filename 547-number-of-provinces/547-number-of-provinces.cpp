@@ -1,12 +1,8 @@
 class Solution {
 private:
     int parent[210];
+    inline int Find(int x) { if (x == parent[x]) return x; return parent[x] = Find(parent[x]); }
 public:
-    int Find(int x) {
-        if (x == parent[x]) return x;
-        return parent[x] = Find(parent[x]);
-    }
-
     int findCircleNum(vector<vector<int>>& isConnected) {
     
         int len = isConnected.size();
