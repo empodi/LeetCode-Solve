@@ -1,34 +1,28 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
+        string ans = s.substr(0,1);
+        int slen = s.length();
+        bool dp[1001][1001];
+        memset(dp, false, sizeof(dp));
         
-        int len = s.length();
-        string ret;
-        int maxLen = 1, start = 0;
-        
-        vector<vector<bool>> dp(len, vector<bool>(len, false));
-        
-        for (int i = 0; i < len; i++)
+        for (int i = 0; i < slen; i++) {
             dp[i][i] = true;
+            if (i) dp[i][i - 1] = true;
+        }
         
-        for (int d = 1; d < len; d++) {
-            for (int j = 0; j < len - d; j++){
-                
-                if (s[j] == s[j + d]) {
-                    
-                    if (d == 1 || dp[j + 1][j + d - 1]) {
-                        
-                        dp[j][j + d] = true;
-                        
-                        if (d + 1 > maxLen) {
-                            maxLen = d + 1;
-                            start = j;
-                        } 
-                    }   
+        for (int len = 2; len <= slen; len++) {
+            for (int i = 0; i <= slen - len; i++) {
+                if (s[i] == s[i + len - 1] && dp[i + 1][i + len - 2]) {
+                    dp[i][i + len - 1] = true;
+                    if (ans.length() < len) {
+                        ans = s.substr(i, len);
+                        cout << ans;
+                    }
                 }
             }
         }
         
-        return s.substr(start, maxLen);
+        return ans;
     }
 };
