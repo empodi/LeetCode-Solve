@@ -11,7 +11,6 @@ private:
     }
 public:
     int search(vector<int>& nums, int target) {
-        
         int left = 0, right = nums.size() - 1;
         
         if (nums[left] <= nums[right]) 
@@ -22,7 +21,6 @@ public:
             if (nums[left] > nums[mid]) right = mid;
             else left = mid;
         }
-        //cout << nums[left] << " " << nums[right];
 
         if (target >= nums[0]) return binarysearch(nums, 0, left, target);
         else return binarysearch(nums, right, nums.size() - 1, target);
