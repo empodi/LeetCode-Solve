@@ -1,4 +1,4 @@
-class Solution {
+class Solution {    // O(N^2)
 public:
     int threeSumClosest(vector<int>& nums, int target) {
         sort(nums.begin(), nums.end());
