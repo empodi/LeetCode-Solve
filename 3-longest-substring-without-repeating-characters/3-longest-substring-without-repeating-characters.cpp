@@ -1,4 +1,4 @@
-class Solution {
+class Solution {    // Time:O(2n) = O(n)  Space: O(m) where m is the size of ASCII array
 public:
     int lengthOfLongestSubstring(string s) {
         
