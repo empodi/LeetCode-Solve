@@ -1,32 +1,24 @@
 class Solution {
-public:
+private:
+    bool check[10];
     vector<vector<int>> ret;
-    int len;
-    
-    void helper(vector<int>& nums, vector<int>& v) {
-        
-        for (int i = 0; i < len; i++) {
-            
-            if (nums[i] == 100) continue;
-            v.push_back(nums[i]);
-            int tmp = nums[i];
-            nums[i] = 100;
-            
-            if (v.size() == len) ret.push_back(v);
-            else helper(nums, v);
-            
-            v.pop_back();
-            nums[i] = tmp;
+    void solve(vector<int>& nums, vector<int>& v) {
+        if (v.size() == nums.size()) {
+            ret.push_back(v);
+            return;
+        }
+        for (int i = 0; i < nums.size(); i++) {
+            if (check[i]) continue;
+            v.push_back(nums[i]); check[i] = true;
+            solve(nums, v);
+            v.pop_back(); check[i] = false;
         }
     }
-    
+public:
     vector<vector<int>> permute(vector<int>& nums) {
-        
-        sort(nums.begin(), nums.end());
-        len = nums.size();
+        memset(check, false, sizeof(check));
         vector<int> v;
-     
-        helper(nums, v);
+        solve(nums, v);
         return ret;
     }
 };
