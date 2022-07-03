@@ -1,34 +1,23 @@
 class Solution {
 private:
     vector<vector<int>> ret;
-    int tg;
-    int len;
-    
-    void dfs(vector<int>& candidates, vector<int>& v, int sum, int idx) {
-        
-        if (sum > tg) return;
-        
-        if (sum == tg) {
+    void solve(vector<int>& candidates, vector<int>& v, int pos, int sum, const int& target) {
+        if (sum > target) return;
+        if (sum == target) {
             ret.push_back(v);
+            return;
         }
-        
-        for (int i = idx; i < len; i++) {
+        for (int i = pos; i < candidates.size(); i++) {
             v.push_back(candidates[i]);
-            dfs(candidates, v, sum + candidates[i], i);
+            solve(candidates, v, i, sum + candidates[i], target);
             v.pop_back();
         }
     }
-    
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        
-        tg = target;
-        len = candidates.size();
-        
+        sort(candidates.begin(),candidates.end());
         vector<int> v;
-        
-        dfs(candidates, v, 0, 0);
-        
+        solve(candidates, v, 0, 0, target);
         return ret;
     }
 };
