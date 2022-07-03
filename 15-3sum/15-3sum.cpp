@@ -1,4 +1,4 @@
-class Solution {
+class Solution {    // O(N^2)
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         if (nums.size() < 3) return {};
