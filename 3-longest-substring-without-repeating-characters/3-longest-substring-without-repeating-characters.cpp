@@ -1,20 +1,21 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int maxLen = 0, start = 0, end = 0;
-        int ASC[128] = { 0, };
         
-        while (end < s.length()) {
-            if (ASC[s[end]] > 0) {
-                while (start < end) {
-                    ASC[s[start++]]--;
-                    if (ASC[s[end]] == 0) break;
+        int ASCII[128] = { 0 };
+        int maxLen = 0, left = 0, right = 0;
+        
+        for (auto c : s) {
+            if (ASCII[c]) {
+                while (ASCII[c]) {
+                    ASCII[s[left++]]--;
                 }
             }
-            maxLen = max(maxLen, end - start + 1);
-            ASC[s[end]]++;
-            end++;
+            ASCII[c]++;
+            maxLen = max(maxLen, right - left + 1);
+            right++;
         }
+        
         return maxLen;
     }
 };
