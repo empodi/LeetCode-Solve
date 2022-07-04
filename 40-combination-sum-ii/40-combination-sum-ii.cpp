@@ -9,10 +9,11 @@ private:
         }
         for (int i = pos; i < cands.size(); i++) {
             if (target < cands[i]) break;
-            if (i > pos && cands[i] == cands[i - 1]) continue;
+            //if (i > pos && cands[i] == cands[i - 1]) continue;
             v.push_back(cands[i]); 
             solve(cands, v, i + 1, sum + cands[i], target);
             v.pop_back(); 
+            while (i < cands.size() - 1 && cands[i] == cands[i + 1]) i++;
         }
     }
 public:
