@@ -15,7 +15,9 @@ private:
     }
 public:
     bool isInterleave(string a, string b, string t) {
-        memset(memo, -1, sizeof(memo));
+        for (int i = 0; i <= a.length(); i++)
+            for (int j = 0; j <= b.length(); j++)
+                memo[i][j] = -1;
         return solve(a,b,t,0,0,0);
     }
 };
