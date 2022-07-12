@@ -29,7 +29,7 @@ public:
         for (int i = 0; i <= nums.size(); i++) visited[i] = false;
         //cout << edge;
         
-        //sort(nums.begin(), nums.end(), greater<int>());
+        sort(nums.begin(), nums.end(), greater<int>());
         return solve(nums, 0, 0, 0);
     }
 };
