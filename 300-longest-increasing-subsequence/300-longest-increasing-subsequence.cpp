@@ -1,18 +1,16 @@
+inline int MAX(int a,int b){return a>b?a:b;}
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        vector<int> v;
-        for (auto& n:nums) {
-            if (v.empty()) v.push_back(n);
-            else {
-                if (n > v.back()) v.push_back(n);
-                else {
-                    auto it = lower_bound(v.begin(), v.end(), n);
-                    *it = n;
-                }
+        vector<int> dp(nums.size(), 1);
+        int answer = 1;
+        for (int i = 1; i < nums.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) 
+                    dp[i] = MAX(dp[i], dp[j] + 1);
             }
+            answer = MAX(answer, dp[i]);
         }
-        for (auto& c:v) cout << c << " "; cout << endl;
-        return v.size();
+        return answer;
     }
 };
