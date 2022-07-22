@@ -11,38 +11,39 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
+        if (!head) return head;
         
-        if (!head || !head->next) return head;
+        auto dummy = new ListNode();
+        auto d_tmp = dummy;
+        auto tmp = head;
+        ListNode* prev = nullptr;
         
-        ListNode* first, *mid, *back, *node, *firstTrail, *midTrail;
-        
-        first = firstTrail = new ListNode();
-        mid = midTrail = new ListNode();
-        
-        node = head;
-        
-        while (1) {
-            back = node->next;
-            
-            if (node->val < x) {
-                node->next = nullptr;
-                firstTrail->next = node;
-                firstTrail = firstTrail->next;
+        while (tmp) 
+        {
+            if (tmp->val >= x) 
+            {   
+                d_tmp->next = tmp;
+                d_tmp = d_tmp->next;
+                if (prev) 
+                {
+                    prev->next = tmp->next; 
+                    tmp = tmp->next; 
+                }
+                else head = tmp = tmp->next;
+                d_tmp->next = nullptr;
             }
-            else {
-                node->next = nullptr;
-                midTrail->next = node;
-                midTrail = midTrail->next;
+            else 
+            {
+                prev = tmp;
+                tmp = tmp->next;
             }
-            
-            if (!back) break;
-            node = back;
         }
         
-        if (first->next) {
-            firstTrail->next = mid->next;
-            return first->next;
-        }
-        else return mid->next;
+        if (prev)
+            prev->next = dummy->next;
+        if (!head)
+            head = dummy->next;
+        delete dummy;
+        return head;
     }
 };
