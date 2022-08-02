@@ -14,13 +14,10 @@ public:
                 if (pq.size() < k) {
                     pq.push(matrix[i][j]);
                 }
-                else {
-                    if (pq.top() > matrix[i][j]) {
-                        pq.pop();
-                        pq.push(matrix[i][j]);
-                    }
+                else if (pq.top() > matrix[i][j]) {
+                    pq.pop();
+                    pq.push(matrix[i][j]);
                 }
-                
             }
         }
         
