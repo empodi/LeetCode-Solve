@@ -6,12 +6,10 @@ public:
         
         for (int i = 0; i < nums.size(); i++) {
             pq.push({ nums[i], i });
-            
-            if (i >= k - 1) {
-                while (!pq.empty() && pq.top().second <= i - k)
-                    pq.pop();
+            while (i >= k - 1 && !pq.empty() && pq.top().second <= i - k)
+                pq.pop();
+            if (i >= k - 1)
                 v.push_back(pq.top().first);
-            }
         }
         return v;
     }
