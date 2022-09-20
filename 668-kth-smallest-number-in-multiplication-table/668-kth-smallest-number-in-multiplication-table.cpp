@@ -6,7 +6,7 @@ public:
         return ret;
     }
     int findKthNumber(int m, int n, int k) {
-        int s = 0, e = m * n;
+        int s = 1, e = k;
         while (s <= e) {
             int mid = (s + e) / 2;
             if (count(m, n, mid) < k) s = mid + 1;
